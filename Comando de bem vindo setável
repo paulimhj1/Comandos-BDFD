@@ -1,0 +1,62 @@
+Comando de bem vindo setável
+Variáveis: 2
+Comandos: 4
+
+-------------------------------------------------
+
+1 - Crie 2 variáveis:
+Nome da variável: join
+Valor: blank (nada)
+
+Nome da variável: leave
+Valor: blank (nada)
+
+-------------------------------------------------
+
+2 - Crie os comandos e coloque:
+
+Tigger: !setentrada
+Script:
+$nomention
+$onlyAdmin[:x: Apenas admins podem usar este comando!]
+$argsCheck[>1;Fale um canal!]
+$title[Canal de bem vindo]
+$description[✅Canal de bem vindo setado para: <#$mentionedChannels[1]>.]
+$footer[Sistema]
+$color[#ff2052]
+$setServerVar[join;$mentionedChannels[1]]
+$addTimestamp
+
+
+Tigger: !setsaida
+Script:
+$nomention
+$onlyAdmin[Apenas admins podem usar este comando!]
+$argsCheck[>1;Fale um canal!]
+$title[Canal de adeus]
+$description[Canal de adeus setado para <#$mentionedChannels[1]>]
+$footer[Sistema]
+$color[$random[15;99999]]
+$setServerVar[leave;$mentionedChannels[1]]
+$addTimestamp
+
+
+Tigger: $onJoined[$getServerVar[join]]
+Script:
+$title[Bem-Vindo!]
+$description[<@$authorID> Entrou no servidor!
+$serverName[$guildID]]
+$footer[Sistema]
+$addTimestamp
+$color[#fff034]
+
+
+Tigger: $onLeave[$getServerVar[leave]]
+Script:
+$nomention
+$title[Adeus...]
+$description[$username Saiu do servidor :(
+$serverName[$guildID]]
+$footer[Sistema]
+$addTimestamp
+$color[#fff034]
